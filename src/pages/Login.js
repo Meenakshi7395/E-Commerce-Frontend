@@ -23,7 +23,7 @@ function Login(){
     const handleChange=(e) =>{
         setFormData({...formData,[e.target.name]:e.target.value});
     };
-    const API_URL = "http://localhost:5000"//process.env.APP_BACKEND_API
+    const API_URL = process.env.REACT_APP_BACKEND_API
 
     function handleSubmit(e){
 
