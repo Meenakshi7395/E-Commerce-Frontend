@@ -13,7 +13,7 @@ function Navigation (){
     return <>    
     <Navbar bg="info" data-bs-theme="dark">
         <Container>
-            <Navbar.Brand href="/">E-Commerce</Navbar.Brand>
+            <Navbar.Brand href="/" >E-Commerce</Navbar.Brand>
                  {user==null ? <></> : <><Nav className="me-auto">
             </Nav> 
 
