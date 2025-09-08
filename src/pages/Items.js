@@ -2,9 +2,7 @@ import Container from 'react-bootstrap/Container';
 import {Row,Button} from 'react-bootstrap';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
-import Table from 'react-bootstrap/Table';
 import React, { useEffect, useState } from "react";
-import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { Spinner } from 'react-bootstrap';
@@ -18,14 +16,9 @@ function Items(){
     const [items,setItems] = useState([])
 
     const navigate = useNavigate();
-
-    // const [isDataChange,setIsDataChange] = useState(0)
     
     const [isDataReady,setIsDataReady] = useState(false)
-    // function dataChange(){
-    //     setIsDataChange(isDataChange+1);
-    // }
-
+  
     const API_URL = process.env.REACT_APP_BACKEND_API
     function getAllItems()   
     {
@@ -55,7 +48,6 @@ function Items(){
             }
 
         }).catch(error=>{
-            //console.error('Login Error: ',error);
             navigate('/')
         });  
     }
@@ -64,15 +56,38 @@ function Items(){
          getAllItems();
     }, []);
 
+
+    function AddToCart(itemId) {
+    fetch(`${API_URL}/cart/add`, {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ itemId, quantity: 1 }),
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          navigate("/cart");
+        } else {
+          alert(data.message);
+        }
+      })
+      .catch(err => console.error(err));
+  }
+
+
+
     return<>
        <Container style={{ marginTop: "10px" }}>
-      {/* <Row className="mb-4">
-        <Col>
-          <Card style={{ textAlign: "center", backgroundColor: "#00BFFF" }}>
-            <h2 style={{ padding: "10px", color: "white" }}>All Items</h2>
-          </Card>
-        </Col>
-      </Row> */}
+
+      <div className="d-flex justify-content-between align-items-center mb-3">
+        <h2>All Items</h2>
+        <Button variant="success" onClick={() => navigate("/cart")}>
+          View Cart
+        </Button>
+      </div>
 
       {isDataReady ? (
         <Row>
@@ -81,7 +96,7 @@ function Items(){
               <Card style={{ height: "100%" }}>
                 <Card.Img variant="top"  src={item.image}  style={{ height: "200px", objectFit: "cover" }} />
 
-                <Card.Body style={{ backgroundColor: "#B0E0E6" }}>
+                <Card.Body style={{ backgroundColor: "#F0F8FF" }}>
 
                   <Card.Title>{item.name}</Card.Title>
 
@@ -93,7 +108,7 @@ function Items(){
                   <p> <strong>Stock:</strong> {item.stock}</p>
                   <p> <strong>Brand:</strong> {item.brand}</p>
                   <p><strong>Ratings:</strong> {item.ratings}</p>
-                  <Button variant="primary" onClick={() => navigate(`/items/${item._id}`)} >Add to Cart </Button>
+                  <Button style={{backgroundColor:"#DCDCDC" , color: "black"}} onClick={() => AddToCart(item._id)} >Add to Cart </Button>
                 </Card.Body>
 
               </Card>
