@@ -7,7 +7,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { useContext } from 'react';
 import EContext from '../context/ecommerce/EContext';
-
+import Img from '../components/Images/frontpage.jpg';
 
 function Login(){
   
@@ -69,7 +69,7 @@ function Login(){
 }
   return <>
     <Card className="bg-dark text-white">
-      
+       <Card.Img src={Img} style={{width:"100%", height: "calc(100vh - 56px)", objectFit: "cover" }} alt="Card image" />
       <Card.ImgOverlay>
         {/* <Card.Title></Card.Title> */}
         <Row>

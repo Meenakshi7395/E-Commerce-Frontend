@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import { Container, Row, Col, Card, Button, Spinner } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import EContext from "../context/ecommerce/EContext";
+import './Items.css';
 
 function Cart() {
   const { accessToken } = useContext(EContext);
@@ -85,12 +86,9 @@ function Cart() {
           <Row>
             {cartItems.map((cartItem, i) => (
               <Col key={i} sm={12} md={6} lg={4} className="mb-4">
-                <Card>
-                  <Card.Img
-                    variant="top"
-                    src={cartItem.item?.image}
-                    style={{ height: "200px", objectFit: "cover" }}
-                  />
+                <Card className='item-card' style={{ height: "100%" }}>
+                  <Card.Img  variant="top" src={cartItem.item?.image}
+                    style={{ height: "200px", objectFit: "cover" }}/>
                   <Card.Body>
                     <Card.Title>{cartItem.item?.name}</Card.Title>
                     <Card.Text>

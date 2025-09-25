@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { Spinner } from 'react-bootstrap';
 import EContext from "../context/ecommerce/EContext";
-
+import './Items.css';
 
 function Items(){
 
@@ -93,8 +93,9 @@ function Items(){
         <Row>
           {items.map((item, i) => (
             <Col key={i} sm={12} md={6} lg={4} className="mb-4">
-              <Card style={{ height: "100%" }}>
-                <Card.Img variant="top"  src={item.image}  style={{ height: "200px", objectFit: "cover" }} />
+              <Card className='item-card' style={{ height: "100%" }}>
+                <Card.Img  variant="top"  src={item.image}  
+                style={{ height: "200px", objectFit: "cover" }} />
 
                 <Card.Body style={{ backgroundColor: "#F0F8FF" }}>
 
@@ -108,7 +109,7 @@ function Items(){
                   <p> <strong>Stock:</strong> {item.stock}</p>
                   <p> <strong>Brand:</strong> {item.brand}</p>
                   <p><strong>Ratings:</strong> {item.ratings}</p>
-                  <Button style={{backgroundColor:"#DCDCDC" , color: "black"}} onClick={() => AddToCart(item._id)} >Add to Cart </Button>
+                  <Button className='btn' style={{backgroundColor:"#DCDCDC" , color: "black"}} onClick={() => AddToCart(item._id)} >Add to Cart </Button>
                 </Card.Body>
 
               </Card>
